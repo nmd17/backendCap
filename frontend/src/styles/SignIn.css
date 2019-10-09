@@ -1,0 +1,37 @@
+.FormContainer {
+    display: flex;
+    justify-content: center;
+    
+}
+
+.SignInForm {
+    width: 200px;
+    border: 2px solid lightgreen;
+    box-sizing: border-box;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    border-radius: 5px;
+    background-color: white;
+}
+
+.MainContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 420px;
+    align-items: center;
+    border: 5px solid lightgreen;
+    padding: 40px;
+    width: fit-content;
+    margin: auto;
+    margin-top: 50px;
+    border-radius: 5px;
+    background-color: mintcream;
+}
+
+#birdPic{
+    width: 50px;
+    height: 50px;
+
+}
