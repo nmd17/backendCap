@@ -3,6 +3,8 @@ import {Form, Button} from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../styles/SignIn.css'
 import axios from 'axios'
+import {Link} from "react-router-dom";
+
 
 class SignIn extends Component{
     constructor(props){
@@ -14,7 +16,6 @@ class SignIn extends Component{
     }
 
     handleChange(id, event){
-        console.log(event.target.value)
         if(id === 'username'){
             this.setState({username: event.target.value})
         }else if(id === 'password'){
@@ -22,24 +23,22 @@ class SignIn extends Component{
         }
     }
 
+
     handleSubmit = (event) => {
         event.preventDefault()
-
         axios.post('http://localhost:8000/api/auth/login/', {
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: {
-                username: this.state.username,
-                password: this.state.password
-            }
+            username: this.state.username,
+            password: this.state.password
         })
         .then(res => {
-            console.log(res)
+            
         })
+        .catch(error => console.log(error.status)) 
+        
     }
 
     render(){
+        console.log(this.props.router)
         return(
             <div className="MainContainer">
                 <div className="FormContainer">
@@ -61,7 +60,7 @@ class SignIn extends Component{
                     </Form>
                 </div>
                 <br></br>
-                <div><a href='#'>Dont have an account? Sign up Here!</a></div>
+                <div>Dont have an account? <Link to='/register'>Sign up here!</Link></div>
                 <br></br>
                 <img id='birdPic' alt='' src={process.env.PUBLIC_URL + '/mennoniteBird.png'}></img>
             </div>
