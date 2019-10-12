@@ -18,13 +18,9 @@ class App extends Component{
       <Router>
         <Switch>
           <Route exact path='/' 
-                 component={() => <HomePage
-                 logged_in={this.state.is_logged_in}
-              />
-            }/>
+                 component={HomePage}/>
           <Route exact path='/login' 
-                component={() => <SignIn
-                logged_in={this.state.is_logged_in}/>}/>
+                component={SignIn}/>
           <Route exact path='/register' component={SignUp}/>
         </Switch>
       </Router>
