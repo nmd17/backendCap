@@ -39,9 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'backend', 
-    'church',
     'knox',
-    'corsheaders'
+    'corsheaders',
+    'accounts'
 ]
 
 MIDDLEWARE = [
@@ -107,15 +107,14 @@ AUTH_PASSWORD_VALIDATORS = [
 
 # Rest framework settings
 REST_FRAMEWORK = {
-    'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.IsAuthenticated',
-    ],
-    'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework.authentication.BasicAuthentication',
+    'DEFAULT_AUTHENTICATION_CLASSES': (
         'knox.auth.TokenAuthentication',
-
-    ]
+        'rest_framework.authentication.BasicAuthentication'
+    )
 }
+
+AUTHENTICATION_BACKENDS = ('django.contrib.auth.backends.ModelBackend',)
+
 
 
 # Internationalization
@@ -140,5 +139,3 @@ STATIC_URL = '/static/'
 CORS_ORIGIN_WHITELIST = [
     'http://localhost:3000',
 ]
-
-APPEND_SLASH=False
