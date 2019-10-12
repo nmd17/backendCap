@@ -2,57 +2,41 @@ import React, {Component} from 'react'
 import {Form, Button} from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../styles/SignIn.css'
-import axios from 'axios'
 import {Link} from "react-router-dom";
+import { loginThenGoToUserProfile as login} from "../actions"
+import { connect } from "react-redux"
 
 
 class SignIn extends Component{
-    constructor(props){
-        super(props);
-        this.state={
-            username: '',
-            password: ''
-        }
-    }
+    state = {username: "", password: ""}
 
-    handleChange(id, event){
-        if(id === 'username'){
-            this.setState({username: event.target.value})
-        }else if(id === 'password'){
-            this.setState({password: event.target.value})
-        }
-    }
-
-
-    handleSubmit = (event) => {
-        event.preventDefault()
-        axios.post('http://localhost:8000/api/auth/login/', {
-            username: this.state.username,
-            password: this.state.password
-        })
-        .then(res => {
-            
-        })
-        .catch(error => console.log(error.status)) 
+    handleChange = e => {
+        this.setState({[e.target.name]: e.target.value})
         
     }
 
+    handleLogin = e => {
+        e.preventDefault()
+        this.props.login(this.state)
+    }
+
     render(){
-        console.log(this.props.router)
+        const { isLoading, err } = this.props
+
         return(
             <div className="MainContainer">
                 <div className="FormContainer">
-                    <Form onSubmit={this.handleSubmit} className="SignInForm">
+                    <Form onSubmit={this.handleLogin} className="SignInForm">
                         <Form.Group controlId="formBasicEmail">
                             <Form.Label>Username</Form.Label>
-                            <Form.Control onChange={(event) => this.handleChange('username',event)}
-                                type="text" placeholder="Username" />
+                            <Form.Control onChange={this.handleChange}
+                                type="text" placeholder="Username" name='username' />
                         </Form.Group>
 
                         <Form.Group controlId="formBasicPassword">
                             <Form.Label>Password</Form.Label>
-                            <Form.Control onChange={(event) => this.handleChange('password', event)}
-                                type="password" placeholder="Password" />
+                            <Form.Control onChange={this.handleChange}
+                                type="password" placeholder="Password" name='password' />
                         </Form.Group>
                         <Button variant="success" type="submit">
                             Submit
@@ -68,4 +52,18 @@ class SignIn extends Component{
     }
 }
 
-export default SignIn
+function mapStateToProps({ auth }) {
+    return {
+        isLoading: auth.loginLoading,
+        err: auth.loginError
+    }
+}
+
+const mapDispatchToProps = {
+    login
+}
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(SignIn)

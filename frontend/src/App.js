@@ -2,30 +2,28 @@ import React, {Component} from 'react';
 import SignIn from './components/SignIn'
 import HomePage from './components/HomePage'
 import SignUp from './components/SignUp'
-import { Switch, Route, BrowserRouter as Router, withRouter} from 'react-router-dom';
+import { connect } from 'react-redux'
+import { Switch, Route} from 'react-router-dom';
 
 class App extends Component{
-  constructor(props){
-    super(props);
-
-    this.state = {
-      is_logged_in: false
-    }
-
-  }
   render(){
+    const { login } = this.props
+
     return (
-      <Router>
         <Switch>
-          <Route exact path='/' 
-                 component={HomePage}/>
-          <Route exact path='/login' 
-                component={SignIn}/>
-          <Route exact path='/register' component={SignUp}/>
+          <Route exact path='/' render={() => login ? <HomePage/> : <SignIn/>}/>
+          <Route path='/login' render={() => <SignIn/>}/>
+          <Route path='/register' render={() => <SignUp/>}/>
         </Switch>
-      </Router>
     )
   }
 }
 
-export default App;
+
+
+export default connect(
+  ({auth}) => ({
+    login: auth.login
+  }),
+  null
+)(App)

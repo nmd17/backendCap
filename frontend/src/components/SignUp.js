@@ -1,34 +1,22 @@
 import React, {Component} from 'react'
 import {Link, Redirect} from "react-router-dom";
 import {Form, Button} from 'react-bootstrap'
-import axios from 'axios'
+import { connect } from 'react-redux'
+import { registerThenGoToUserProfile as register } from '../actions'
 
 class SignUp extends Component{
-    constructor(props){
-        super(props);
-        this.state={
-            username: '',
-            password: ''
-        }
+    state = {
+        username: "",
+        password: ""
     }
 
-    handleChange(id, event){
-        if(id === 'username'){
-            this.setState({username: event.target.value})
-        }else if(id === 'password'){
-            this.setState({password: event.target.value})
-        }
+    handleChange = e => {
+        this.setState({[e.target.name]: e.target.value})
     }
 
-    handleSubmit = (event) => {
-        event.preventDefault()
-        axios.post('http://localhost:8000/api/auth/register/', {
-            username: this.state.username,
-            password: this.state.password
-        })
-        .then(res => {
-            console.log(res)
-        })
+    handleSubmit = e => {
+        e.preventDefault()
+        this.props.register(this.state)
         
     }
 
@@ -39,14 +27,14 @@ class SignUp extends Component{
                     <Form onSubmit={this.handleSubmit} className="SignInForm">
                         <Form.Group controlId="formBasicEmail">
                             <Form.Label>Username</Form.Label>
-                            <Form.Control onChange={(event) => this.handleChange('username',event)}
-                                type="text" placeholder="Username" />
+                            <Form.Control onChange={this.handleChange}
+                                type="text" placeholder="Username" name='username' />
                         </Form.Group>
 
                         <Form.Group controlId="formBasicPassword">
                             <Form.Label>Password</Form.Label>
-                            <Form.Control onChange={(event) => this.handleChange('password', event)}
-                                type="password" placeholder="Password" />
+                            <Form.Control onChange={this.handleChange}
+                                type="password" placeholder="Password" name='password' />
                         </Form.Group>
                         <Button variant="success" type="submit">
                             Submit
@@ -62,4 +50,18 @@ class SignUp extends Component{
     }
 }
 
-export default SignUp
+function mapStateToProps({auth}) {
+    return {
+        registerLoading: auth.registerLoading,
+        registerError: auth.registerError
+    }
+}
+
+const mapDispatchToProps = {
+    register
+}
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(SignUp)
