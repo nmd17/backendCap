@@ -5,11 +5,6 @@ import { connect } from 'react-redux'
 import { registerThenGoToUserProfile as register } from '../actions'
 
 class SignUp extends Component{
-    state = {
-        username: "",
-        password: ""
-    }
-
     handleChange = e => {
         this.setState({[e.target.name]: e.target.value})
     }
@@ -22,7 +17,7 @@ class SignUp extends Component{
 
     render(){
         return(
-            <div className="MainContainer">
+            <div style={{height: '700px'}}className="MainContainer">
                 <div className="FormContainer">
                     <Form onSubmit={this.handleSubmit} className="SignInForm">
                         <Form.Group controlId="formBasicEmail">
@@ -36,13 +31,31 @@ class SignUp extends Component{
                             <Form.Control onChange={this.handleChange}
                                 type="password" placeholder="Password" name='password' />
                         </Form.Group>
+                        <Form.Group controlId='formBasicEmail'>
+                            <Form.Label>Email</Form.Label>
+                            <Form.Control onChange={this.handleChange}
+                                type="text" placeholder="Email" name='email' />
+
+                        </Form.Group>
+                        <Form.Group controlId='formBasicEmail'>
+                            <Form.Label>First Name</Form.Label>
+                            <Form.Control onChange={this.handleChange}
+                                type="text" placeholder="First Name" name='first_name' />
+
+                        </Form.Group>
+                        <Form.Group controlId='formBasicEmail'>
+                            <Form.Label>Last Name</Form.Label>
+                            <Form.Control onChange={this.handleChange}
+                                type="text" placeholder="Last Name" name='last_name' />
+
+                        </Form.Group>
                         <Button variant="success" type="submit">
                             Submit
                         </Button>
                     </Form>
                 </div>
                 <br></br>
-                <div>Already have an account? <Link to='/login'>Login</Link></div>
+                <div>Already have an account? <Link to='/'>Login</Link></div>
                 <br></br>
                 <img id='birdPic' alt='' src={process.env.PUBLIC_URL + '/mennoniteBird.png'}></img>
             </div>

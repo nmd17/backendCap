@@ -1,9 +1,15 @@
 .mainContainer{
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-around;
     background-color: #20A162;
     position: absolute;
     z-index: -1;
+}
+
+#logoutBtn{
+    display: flex;
+    position: absolute;
+    left: 1200px;
 }
 
 .birdPic{

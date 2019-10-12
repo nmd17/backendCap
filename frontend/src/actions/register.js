@@ -15,7 +15,10 @@ const register = registerData => dispatch => {
 
     return axios.post(url + '/register/', {
         username: registerData['username'],
-        password: registerData['password']
+        password: registerData['password'],
+        email: registerData['email'],
+        first_name: registerData['first_name'],
+        last_name: registerData['last_name']
     })
     .then(res => {
         localStorage.setItem("token", res.data.token)

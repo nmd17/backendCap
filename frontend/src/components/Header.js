@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { logoutThenGoToLoginPage as logout } from "../actions"
+import { getConferences } from '../actions'
 import { Navbar, Button } from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import '../styles/Header.css'
@@ -10,9 +11,11 @@ class Header extends Component{
         this.props.logout()
     }
 
-    render(){
-        const { login } = this.props
+    redirectPage = () => {
+        console.log(this.props)
+    }
 
+    render(){
         return(
             <div>
                 <Navbar.Brand href="/">
@@ -24,6 +27,20 @@ class Header extends Component{
                 <Navbar variant="light" fixed="top" className='mainContainer'>
                     <React.Fragment>
                         <Button
+                            onClick={this.redirectPage}
+                            variant='outline-dark'
+                            type='button'
+                        >Conferences</Button>
+                    </React.Fragment>
+                    <React.Fragment>
+                        <Button
+                            variant='outline-dark'
+                            type='button'
+                        >Report</Button>
+                    </React.Fragment>
+                    <React.Fragment>
+                        <Button
+                            id='logoutBtn'
                             variant="outline-dark"
                             type="button"
                             onClick={this.handleLogout}
