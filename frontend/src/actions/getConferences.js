@@ -8,7 +8,7 @@ const url = 'http://localhost:8000/conferences/'
 export const getConferences = () => dispatch => {
     return axios.get(url)
     .then(data => {
-        console.log(data.data)
+        console.log(data)
         return dispatch({
            type: CONFERENCES_SUCCEEDED,
            payload: data

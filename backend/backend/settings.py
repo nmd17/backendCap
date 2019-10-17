@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'backend', 
     'knox',
     'corsheaders',
-    'accounts'
+    'accounts',
+    'posts'
 ]
 
 MIDDLEWARE = [

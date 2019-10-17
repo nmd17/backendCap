@@ -6,5 +6,5 @@ class ConferenceSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = Conference
-        fields = ('conference_ministers', 'name', 'location')
+        fields = ('conference_minister', 'name', 'location')
 

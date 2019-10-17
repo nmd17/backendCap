@@ -11,7 +11,7 @@ export default (state = initialState, action) => {
         case CONFERENCES_SUCCEEDED:
             return {
                 ...state,
-                conferences: [...state.conferences, ...action.payload.data],
+                conferences: [...action.payload.data],
                 conferences_succeeded: true,
                 conferences_failed: false
             }

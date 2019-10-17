@@ -1,0 +1,39 @@
+.PostFormContainer {
+    display: flex;
+    justify-content: center;
+    width: 400px;
+    
+    
+}
+
+.PostForm {
+    width: 400px;
+    border: 2px solid lightgreen;
+    box-sizing: border-box;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    border-radius: 5px;
+    background-color: white;
+}
+
+.PostMainContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 460px;
+    align-items: center;
+    border: 5px solid lightgreen;
+    padding: 40px;
+    width: fit-content;
+    margin: auto;
+    margin-top: 50px;
+    border-radius: 5px;
+    background-color: mintcream;
+}
+
+#birdPic{
+    width: 50px;
+    height: 50px;
+
+}
